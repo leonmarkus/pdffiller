@@ -102,7 +102,7 @@
             }.bind(this));
         },
 
-        fillFormWithOptions: function( sourceFile, destinationFile, fieldValues, shouldFlatten, tempFDFPath, callback ) {
+        fillFormWithOptions: function( sourceFile, destinationFile, fieldValues, args, tempFDFPath, callback ) {
 
 
             //Generate the data from the field values.
@@ -136,11 +136,13 @@
         },
 
         fillFormWithFlatten: function( sourceFile, destinationFile, fieldValues, shouldFlatten, callback ) {
-            this.fillFormWithOptions( sourceFile, destinationFile, fieldValues, shouldFlatten, undefined, callback);
+            const args = [];
+            if (shouldFlatten) args.push('flatten');
+            this.fillFormWithOptions( sourceFile, destinationFile, fieldValues, args, undefined, callback);
         },
 
-        fillForm: function( sourceFile, destinationFile, fieldValues, callback) {
-            this.fillFormWithFlatten( sourceFile, destinationFile, fieldValues, true, callback);
+        fillForm: function( sourceFile, destinationFile, fieldValues, args = ['need_appearances'], callback) {
+            this.fillFormWithOptions( sourceFile, destinationFile, fieldValues, args, callback);
         }
 
     };
